@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Conversation {
+  id          String @id @default(cuid())
+  phoneNumber String @unique
+
+  messages Message[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("conversations")
+}
+
+model Message {
+  id String @id @default(cuid())
+
+  direction String // inbound | outbound
+
+  content String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String       @map("conversation_id")
+
+  @@map("messages")
+}
