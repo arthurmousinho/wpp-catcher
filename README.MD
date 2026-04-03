@@ -29,11 +29,11 @@
 
 #### 2. Messaging Abstraction
 
-\`\`\`ts
+```ts
 interface WhatsappProvider {
-send(data: SendMessageDTO): Promise<void>;
+  send(data: SendMessageDTO): Promise<void>;
 }
-\`\`\`
+```
 
 #### 3. Providers
 
